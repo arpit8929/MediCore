@@ -10,9 +10,6 @@ MediCore is an intelligent healthcare web application that uses machine learning
 
 The application can predict the following diseases:
 
-- **Liver Disease** - Predicts liver disease based on various blood test parameters
-- **Pneumonia Disease** - Diagnoses pneumonia from chest X-ray images using deep learning
-- **Kidney Disease** - Predicts chronic kidney disease using machine learning
 - **Diabetes Disease** - Forecasts diabetes based on patient data
 - **Stroke Disease** - Predicts stroke risk using medical parameters
 - **Heart Disease** - Analyzes heart disease risk factors
