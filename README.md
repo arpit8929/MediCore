@@ -96,9 +96,6 @@ MediCore/
 
 ## Model Information
 
-- **Liver Disease:** Uses ensemble methods with various blood test parameters
-- **Pneumonia:** Deep learning CNN model trained on chest X-ray images
-- **Kidney Disease:** Random Forest classifier with medical parameters
 - **Diabetes:** Gradient boosting with patient health data
 - **Stroke:** Logistic regression with risk factors
 - **Heart Disease:** Support Vector Machine with cardiovascular parameters
