@@ -304,7 +304,7 @@ p
   animation: progress 1s ease-out forwards;
 }
 
-#disease_page @keyframes progress {
+@keyframes progress {
   0% {
     stroke-dasharray: 0 100;
   }
@@ -412,12 +412,19 @@ p
     clear: both;
     position: relative;
 }
+.iso-box-wrapper {
+    display: flex;
+    justify-content: center; /* center items horizontally */
+}
 .iso-box {
     position: relative;
     min-height: 50px;
     float: left;
     overflow: hidden;
     margin-bottom: 20px;
+}
+.iso-box {
+    float: none; /* override float so flex centering works */
 }
 .iso-box > a {
     display: block;

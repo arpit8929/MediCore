@@ -65,8 +65,9 @@ jQuery(document).ready(function($){
       $container.imagesLoaded(function () {
 
         $container.isotope({
-        layoutMode: 'fitRows',
-        itemSelector: '.iso-box'
+        layoutMode: 'vertical',
+        itemSelector: '.iso-box',
+        vertical: { horizontalAlignment: 0.5 }
         });
 
         $imgs.load(function(){
