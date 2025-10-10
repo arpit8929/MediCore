@@ -5,7 +5,6 @@ certifi
 charset-normalizer
 clang
 click
-Flask
 Flask-SQLAlchemy
 flatbuffers
 gast
@@ -24,7 +23,6 @@ keras
 Keras-Preprocessing
 Markdown
 MarkupSafe
-numpy
 oauthlib
 opt-einsum
 Pillow
@@ -34,8 +32,6 @@ pyasn1-modules
 requests
 requests-oauthlib
 rsa
-scikit-learn
-scipy
 six
 SQLAlchemy
 tensorboard
