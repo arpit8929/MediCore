@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCore</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4 {
+            color: #1a535c;
+        }
+        h2 {
+            border-bottom: 2px solid #4ecdc4;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 1.8em;
+        }
+        h3 {
+            color: #ff6b6b;
+            font-size: 1.4em;
+            margin-top: 30px;
+        }
+        .summary {
+            background-color: #eef7f7;
+            border-left: 5px solid #4ecdc4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        li strong {
+            color: #1a535c;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .exercise-item img {
+            border-radius: 8px;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+        .disclaimer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .prediction {
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #93ca3a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 0;
+            border: 2px solid transparent;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #fff;
+            color: #93ca3a;
+            border: 2px solid #93ca3a;
+            text-decoration: none;
+        }
+        .btn-success {
+            background: #93ca3a;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Personalized Health Recommendations</h1>
+
+        <div id="heart-patient-recommendations">
+            
+            <h2>❤️ Heart-Healthy Diet Plan (For Patients)</h2>
+            <p class="summary">Your diet should focus on reducing sodium, saturated fats, and cholesterol. The goal is to support heart function and manage blood pressure. Always consult your doctor before making significant dietary changes.</p>
+            
+            <h3>Foods to Eat</h3>
+            <ul>
+                <li><strong>Fruits & Vegetables:</strong> Leafy greens (spinach, kale), berries, oranges, broccoli. <em>(Rich in vitamins, minerals, and antioxidants.)</em></li>
+                <li><strong>Lean Proteins:</strong> Skinless poultry, fish (especially salmon and mackerel), beans, lentils. <em>(Omega-3s in fish are excellent for heart health.)</em></li>
+                <li><strong>Whole Grains:</strong> Oatmeal, brown rice, quinoa, whole-wheat bread. <em>(High in fiber, which helps lower cholesterol.)</em></li>
+                <li><strong>Healthy Fats:</strong> Avocado, nuts (almonds, walnuts), seeds (chia, flax), olive oil. <em>(Helps reduce bad cholesterol levels.)</em></li>
+            </ul>
+
+            <h3>Foods to Limit or Avoid</h3>
+            <ul>
+                <li><strong>High-Sodium Foods:</strong> Processed meats (sausages, bacon), canned soups, frozen dinners. <em>(Excess sodium increases blood pressure.)</em></li>
+                <li><strong>Saturated & Trans Fats:</strong> Red meat, butter, fried foods, baked goods (pastries, cookies). <em>(Can lead to cholesterol buildup in arteries.)</em></li>
+                <li><strong>Sugary Foods & Drinks:</strong> Soda, candy, sugary cereals. <em>(Contribute to inflammation and weight gain.)</em></li>
+            </ul>
+
+            <h2>💪 Safe Exercise Plan (For Patients)</h2>
+            <p class="summary">Start slowly with low-impact aerobic exercises. Aim for 30 minutes on most days. <strong>Crucially, get approval from your doctor before starting any exercise program.</strong> Stop immediately if you feel dizzy, short of breath, or have chest pain.</p>
+
+            <h3>Recommended Activities</h3>
+            <ul>
+                <li class="exercise-item">
+                    <img src="https://via.placeholder.com/150/4ecdc4/fff?text=Walk" alt="Brisk Walking">
+                    <div>
+                        <h4>Brisk Walking</h4>
+                        <p>The simplest way to improve heart health. Walk at a pace where you can still hold a conversation.</p>
+                        <p><strong>Duration:</strong> Start with 10-15 minutes, gradually increasing to 30-45 minutes, 5 days a week.</p>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <img src="https://via.placeholder.com/150/ff6b6b/fff?text=Cycle" alt="Stationary Cycling">
+                    <div>
+                        <h4>Stationary Cycling</h4>
+                        <p>A low-impact exercise that's easy on the joints and great for building stamina.</p>
+                        <p><strong>Duration:</strong> 15-20 minutes at a low resistance, 3-4 days a week.</p>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                     <img src="https://via.placeholder.com/150/1a535c/fff?text=Swim" alt="Water Aerobics">
+                    <div>
+                        <h4>Water Aerobics</h4>
+                        <p>The water supports your body, reducing stress on your heart and joints. Ideal for those with arthritis.</p>
+                        <p><strong>Duration:</strong> 30-minute sessions, 2-3 times a week.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="non-heart-patient-recommendations">
+            
+            <h2>🥗 Preventive Diet Plan (For a Healthy Heart)</h2>
+            <p class="summary">Focus on a balanced diet rich in whole foods to maintain cardiovascular health and prevent future risks.</p>
+
+            <h3>Foods to Eat</h3>
+            <ul>
+                <li><strong>Balanced Diet:</strong> A wide variety of fruits, vegetables, lean proteins, and whole grains. <em>(A colorful plate is a healthy plate.)</em></li>
+                <li><strong>Fiber-Rich Foods:</strong> Oats, barley, apples, beans, and nuts. <em>(Helps manage cholesterol and blood sugar.)</em></li>
+                <li><strong>Mindful Eating:</strong> Control portion sizes and limit processed foods. <em>(Healthy eating is a lifelong habit.)</em></li>
+            </ul>
+            
+            <h3>Foods to Limit</h3>
+             <ul>
+                <li><strong>Processed Foods:</strong> Fast food, packaged snacks, and sugary drinks. <em>(Often high in unhealthy fats, sugar, and sodium.)</em></li>
+                <li><strong>Moderate Alcohol:</strong> Limit alcoholic beverages. <em>(Excessive alcohol can raise blood pressure.)</em></li>
+            </ul>
+
+            <h2>🏃‍♂️ Preventive Exercise Plan (For a Healthy Heart)</h2>
+            <p class="summary">Regular physical activity is key to preventing heart disease. Aim for a mix of cardio, strength, and flexibility training.</p>
+            
+            <h3>Recommended Activities</h3>
+            <ul>
+                 <li class="exercise-item">
+                    <img src="https://via.placeholder.com/150/4ecdc4/fff?text=Jog" alt="Jogging">
+                    <div>
+                        <h4>Moderate to Vigorous Cardio</h4>
+                        <p>Activities that get your heart rate up, like jogging, swimming, or dancing.</p>
+                        <p><strong>Duration:</strong> At least 150 minutes of moderate (or 75 minutes of vigorous) activity per week.</p>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <img src="https://via.placeholder.com/150/ff6b6b/fff?text=Lift" alt="Strength Training">
+                    <div>
+                        <h4>Strength Training</h4>
+                        <p>Use weights, resistance bands, or your body weight (push-ups, squats) to build muscle.</p>
+                        <p><strong>Duration:</strong> 2 or more days a week, working all major muscle groups.</p>
+                    </div>
+                </li>
+                 <li class="exercise-item">
+                    <img src="https://via.placeholder.com/150/1a535c/fff?text=Stairs" alt="Taking the stairs">
+                    <div>
+                        <h4>Stay Active Daily</h4>
+                        <p>Incorporate more movement into your day. Take the stairs, walk during breaks, and reduce sedentary time.</p>
+                        <p><strong>Duration:</strong> Throughout the day, every day.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="disclaimer">
+            ⚠️ <strong>IMPORTANT DISCLAIMER:</strong> This information is for educational purposes only. Always consult with a qualified healthcare professional for medical advice, diagnosis, or treatment.
+        </div>
+        <br>
+        <div class="prediction text-center">
+		    <a href="/" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Back Home</a>
+	  	</div>
+    </div>
+
+</body>
+</html>
