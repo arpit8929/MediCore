@@ -1,0 +1,52 @@
+# Virtual environment
+venv_39/
+venv/
+env/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files (will be created fresh on Vercel)
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads folder (if you want to exclude uploaded files)
+uploads/
+
+# Documentation
+README.md
+*.md
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Git
+.git/
+.gitignore
+
+# Node modules (if any)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
