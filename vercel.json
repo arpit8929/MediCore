@@ -16,11 +16,6 @@
       "FLASK_ENV": "production",
       "FLASK_APP": "app.py",
       "PYTHONPATH": "/var/task"
-    },
-    "functions": {
-      "app.py": {
-        "maxDuration": 30
-      }
     }
   }
   
