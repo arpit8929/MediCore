@@ -7,28 +7,20 @@ MarkupSafe==2.0.1
 itsdangerous==2.0.1
 click==8.0.1
 
-# Machine Learning dependencies
+# Machine Learning dependencies (your required versions)
 scikit-learn==0.24.2
 numpy==1.19.5
-scipy==1.7.1
 joblib==1.0.1
-xgboost==1.4.2
 
 # Image processing
 Pillow==8.3.2
-
-# TensorFlow (CPU version for Vercel)
-tensorflow-cpu==2.6.0
 
 # Database
 SQLAlchemy==1.4.23
 
 # HTTP requests
 requests==2.26.0
-urllib3==1.26.6
 
 # Utilities
 six==1.15.0
 certifi==2021.5.30
-idna==3.2
-charset-normalizer==2.0.4
