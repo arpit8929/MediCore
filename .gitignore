@@ -154,3 +154,4 @@ uploads/
 # *.pkl
 # *.h5
 # *.keras
+.vercel
