@@ -4,215 +4,161 @@
 <br>
 <br>
 <div id="disease_page">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-sm-6 wow fadeInLeft" data-wow-delay="0.5s">
-						<h3>Heart Disease</h3>
-						<h4>🫀 Overview</h4>
-						<p>	Heart disease refers to a range of conditions that affect the heart’s structure and function.
-							The most common form is Coronary Artery Disease (CAD), which occurs when fatty deposits (plaque) build up in the arteries that supply blood to the heart.
-							This reduces oxygen flow, leading to chest pain, shortness of breath, and sometimes a heart attack.
-							Early detection and healthy habits can greatly reduce the risk.
-						</p>
-						
-					</div>
-					
-					<div class="col-md-6 col-sm-6 wow fadeInRight" data-wow-delay="0.5s">
-						<img class="ill_image" src="./static/images/disease_img/theheart1.jpg">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 wow fadeInRight" data-wow-delay="0.5s">
-						<h4>
-						Types of Heart Disease</h4>
-					    <ul>
-					      <li>Coronary Artery Disease (CAD): Blockage or narrowing of heart arteries due to plaque buildup.</li>
-					      <br>
-						  <li>Heart Attack (Myocardial Infarction): Occurs when blood flow to part of the heart is completely blocked.</li>
-					      <br>
-						  <li>Arrhythmia: Irregular or abnormal heartbeat.
-						</li>
-						<br>
-					      <li>Heart Failure: The heart becomes weak and cannot pump blood properly.
-						</li>
-						<br>
-					      <li>Cardiomyopathy: Disease of the heart muscle that affects its pumping ability.
-						</li>
-						<br>
-					      <li>Heart Valve Disease: Valves do not open or close properly, affecting blood flow.</li>
-					    </ul>
-
-					</div>
-				</div>
-				<br>
-				<br>
-				<div class="row">
-					<div class="col-12 wow fadeInRight" data-wow-delay="0.5s">
-						<h4>Risk Factors
-						</h4>
-						<p>Heart disease develops due to a combination of lifestyle, genetic, and health-related factors. </p>
-						<p>Common risk factors include:</p>
-
-						
-					    <ul>
-							<li>High blood pressure (hypertension)</li>
-							<li>High cholesterol levels</li>
-							<li>Diabetes or high blood sugar</li>
-							<li>Smoking and alcohol consumption</li>
-							<li>Obesity or overweight</li>
-							<li>Lack of regular physical activity</li>
-							<li>Family history of heart disease</li>
-							<li>Stress and poor diet</li>
-						  </ul>
-						  
-
-					</div>
-				</div>
-				<br>
-				<br>
-				<div class="row">
-					<div class="col-12 wow fadeInRight" data-wow-delay="0.5s">
-						<h4>Common Symptoms</h4>
-						<p>Heart disease symptoms may vary from mild to severe. Some of the most common include:
-							</p>
-							<ul>
-								<li>Chest pain, heaviness, or pressure (angina)</li>
-								<li>Shortness of breath, especially during activity</li>
-								<li>Fatigue or weakness</li>
-								<li>Dizziness or fainting</li>
-								<li>Pain in the neck, jaw, back, or arms</li>
-								<li>Cold sweats, nausea, or indigestion</li>
-							  </ul>
-							  
-
-					</div>
-				</div>
-				
+	<div class="container">
+		<div class="row">
+			<br>
+			<br>
+			<br>
+			
+			<div class="col-md-12 text-center wow fadeInUp" data-wow-delay="0.5s">
+				<h3>🧩 Heart Disease Prediction Parameters</h3>
+				<p class="page-subtitle">Key clinical inputs used by our models and overall performance.</p>
 			</div>
-			<br>
-			<br>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-sm-6 wow fadeInRight" data-wow-delay="0.5s">
-						<h3>🧩 Heart Disease Prediction Parameters
-						</h3>
-
-<ul>
-  <li><strong>Age:</strong> The age of the patient in years. Older patients (usually above 45) have a higher risk of heart disease.</li>
-
-  <li><strong>Sex:</strong> Gender of the patient:
-    <ul>
-      <li>1 → Male</li>
-      <li>0 → Female</li>
-    </ul>
-    Men are more likely to develop heart disease earlier than women.
-  </li>
-
-  <li><strong>Chest Pain Type (cp):</strong> Type of chest pain experienced:
-    <ul>
-      <li>0 → Typical angina</li>
-      <li>1 → Atypical angina</li>
-      <li>2 → Non-anginal pain</li>
-      <li>3 → Asymptomatic</li>
-    </ul>
-  </li>
-
-  <li><strong>Resting Blood Pressure (trestbps):</strong> Blood pressure when the patient is at rest (mm Hg). Normal range: 90–120 mm Hg.</li>
-
-  <li><strong>Serum Cholesterol (chol):</strong> Cholesterol level in the blood (mg/dl). Healthy value is below 200 mg/dl.</li>
-
-  <li><strong>Fasting Blood Sugar (fbs):</strong> Fasting blood sugar level (mg/dl):
-    <ul>
-      <li>1 → &gt;120 mg/dl (High)</li>
-      <li>0 → ≤120 mg/dl (Normal)</li>
-    </ul>
-  </li>
-
-  <li><strong>Resting ECG (restecg):</strong> Result of the resting electrocardiogram:
-    <ul>
-      <li>0 → Normal</li>
-      <li>1 → ST-T wave abnormality</li>
-      <li>2 → Left ventricular hypertrophy</li>
-    </ul>
-  </li>
-
-  <li><strong>Maximum Heart Rate Achieved (thalach):</strong> The highest heart rate reached during exercise. Typical range: 100–200 bpm.</li>
-
-  <li><strong>Exercise Induced Angina (exang):</strong> Whether the patient experienced chest pain during exercise:
-    <ul>
-      <li>1 → Yes</li>
-      <li>0 → No</li>
-    </ul>
-  </li>
-
-  <li><strong>Oldpeak:</strong> ST depression induced by exercise relative to rest. Lower values are better (range: 0.0–6.2).</li>
-
-  <li><strong>Slope:</strong> The slope of the peak exercise ST segment:
-    <ul>
-      <li>0 → Upsloping</li>
-      <li>1 → Flat</li>
-      <li>2 → Downsloping</li>
-    </ul>
-  </li>
-
-  <li><strong>ca (Number of Major Vessels):</strong> Number of major blood vessels (0–3) colored by fluoroscopy. A higher number indicates higher risk.</li>
-
-  <li><strong>thal (Thalassemia Type):</strong> Blood disorder test result:
-    <ul>
-      <li>1 → Normal</li>
-      <li>2 → Fixed defect</li>
-      <li>3 → Reversible defect</li>
-    </ul>
-  </li>
-
-  <li><strong>Target:</strong> Final prediction output of the model:
-    <ul>
-      <li>0 → No Heart Disease</li>
-      <li>1 → Heart Disease Present</li>
-    </ul>
-  </li>
-</ul>
-
-					</div>
-					<div class="col-md-6 col-sm-6  wow fadeInRight" data-wow-delay="0.5s">
+		</div>
+		<!-- All parameter cards grouped together -->
+		<div class="row param-grid">
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Age</h5>
+					<p>The age of the patient in years. Older patients (usually above 45) have a higher risk of heart disease.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Sex</h5>
+					<p>1 → Male, 0 → Female. Men are more likely to develop heart disease earlier than women.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Chest Pain Type (cp)</h5>
+					<ul class="param-list">
+						<li>0 → Typical angina</li>
+						<li>1 → Atypical angina</li>
+						<li>2 → Non-anginal pain</li>
+						<li>3 → Asymptomatic</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Resting Blood Pressure (trestbps)</h5>
+					<p>Blood pressure at rest (mm Hg). Normal range: 90–120 mm Hg.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Serum Cholesterol (chol)</h5>
+					<p>Cholesterol level (mg/dl). Healthy value is below 200 mg/dl.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Fasting Blood Sugar (fbs)</h5>
+					<ul class="param-list">
+						<li>1 → &gt;120 mg/dl (High)</li>
+						<li>0 → ≤120 mg/dl (Normal)</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Resting ECG (restecg)</h5>
+					<ul class="param-list">
+						<li>0 → Normal</li>
+						<li>1 → ST-T wave abnormality</li>
+						<li>2 → Left ventricular hypertrophy</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Maximum Heart Rate (thalach)</h5>
+					<p>Highest heart rate during exercise. Typical range: 100–200 bpm.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Exercise Induced Angina (exang)</h5>
+					<p>1 → Yes, 0 → No.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Oldpeak</h5>
+					<p>ST depression induced by exercise relative to rest. Lower is better (0.0–6.2).</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Slope</h5>
+					<ul class="param-list">
+						<li>0 → Upsloping</li>
+						<li>1 → Flat</li>
+						<li>2 → Downsloping</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">ca (Major Vessels)</h5>
+					<p>Number of major blood vessels (0–3) colored by fluoroscopy; higher often indicates higher risk.</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">thal (Thalassemia)</h5>
+					<ul class="param-list">
+						<li>1 → Normal</li>
+						<li>2 → Fixed defect</li>
+						<li>3 → Reversible defect</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-8">
+				<div class="param-card" style="font-size:16px; line-height:1.6;">
+					<h5 class="param-title" style="font-size:18px; font-weight:700; margin-bottom:6px;">Target</h5>
+					<p>Final prediction output of the model: 0 → No Heart Disease, 1 → Heart Disease Present.</p>
+				</div>
+			</div>
+		</div>
+		<!-- Accuracy block at the end -->
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 col-sm-12">
+				<div class="accuracy-card text-center" style="font-size:16px; line-height:1.6;">
+					<div class="accuracy-wrap">
 						<div class="flex-wrapper">
-						  <div class="single-chart">
-						    <svg viewBox="0 0 36 36" class="circular-chart orange">
-						      <path class="circle-bg"
-						        d="M18 2.0845
-						          a 15.9155 15.9155 0 0 1 0 31.831
-						          a 15.9155 15.9155 0 0 1 0 -31.831"
-						      />
-						      <path class="circle"
-						        stroke-dasharray="86, 100"
-						        d="M18 2.0845
-						          a 15.9155 15.9155 0 0 1 0 31.831
-						          a 15.9155 15.9155 0 0 1 0 -31.831"
-						      />
-						      <text x="18" y="20.35" class="percentage">90%</text>
-						    </svg>
-						    <h4 style="text-align: center;">Accuracy</h4>
-						  </div>
-						  </div>
+							<div class="single-chart">
+								<svg viewBox="0 0 36 36" class="circular-chart orange">
+									<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+									<path class="circle" stroke-dasharray="86, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+									<text x="18" y="20.35" class="percentage">90%</text>
+								</svg>
+								<h4>Accuracy</h4>
+							</div>
 						</div>
 					</div>
-			
-					
+					<div class="accuracy-notes">
+						<p>We compare multiple algorithms (Logistic Regression, Naive Bayes, SVM, KNN, Decision Tree, Random Forest, XGBOOST, Neural Network) and report the best validation performance.</p>
+					</div>
 				</div>
 			</div>
-			<br>
-			<br>
-			<br>
-			<div class="prediction text-center">
-			    <a href="/heart_form" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Predict</a>
-		  	</div>
-			<br>
-		  	<br>
-		  	<br>
-		  	<br>
-
 		</div>
-		
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="prediction text-center">
+			<a href="/heart_form" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="200">Start Your Checkup</a>
+		</div>
+		<br>
+		<br>
+	</div>
 
 {% endblock %}
 
