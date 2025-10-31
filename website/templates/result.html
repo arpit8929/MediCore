@@ -1,53 +1,549 @@
 {% extends "disease_page.html" %}
 {% block page %}
   
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+<br>
+<br>
+<br>
 
-  <h2 class="pt-10 text-center">{{page}} Disease Prediction </h2>
-  
+<!-- Print and Download Icons -->
+<div class="container" style="max-width: 900px; margin: auto;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="text-right" style="margin-bottom: 20px;">
+				<button onclick="window.print()" class="btn btn-default" style="margin-right: 10px; border-radius: 50%; width: 50px; height: 50px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: #f8f9fa; border: 2px solid #2ecc71; cursor: pointer;">
+					<i class="fa fa-print" style="font-size: 20px; color: #2ecc71;"></i>
+				</button>
+				<button onclick="downloadReport()" class="btn btn-default" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: #f8f9fa; border: 2px solid #3498db; cursor: pointer;">
+					<i class="fa fa-download" style="font-size: 20px; color: #3498db;"></i>
+				</button>
+			</div>
+			
+			<!-- Header -->
+			<div class="text-center wow fadeInUp" data-wow-delay="0.3s">
+				<h1 style="font-size: 36px; font-weight: 700; color: #2c3e50; margin-bottom: 20px;">
+					My Heart Check Results
+				</h1>
+			</div>
 
-  <div style="width: 90%; margin: auto; text-align: center">
-  	{% if prediction == 0 %}
-      <img src="./static/images/happy.jpg" style ="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 20px">
-      <br>
-      <br>
-      <p style="font-style: italic; font-size: 20px">No need to fear. You have no dangerous symptoms of the {{page}} disease</p>
-      <br>
-      <br>
-      
-       <div class="prediction text-center">
-		    <a href="/" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Back Home</a>
-	  	</div>
-      <br>
-      <br>
+			{% if error_message %}
+			<!-- ERROR DISPLAY -->
+			<div class="alert alert-danger text-center" style="margin: 30px 0; padding: 20px; border-radius: 8px;">
+				<h4>⚠️ Error Occurred</h4>
+				<p>{{ error_message }}</p>
+				<a href="/heart_form" class="btn btn-default" style="margin-top: 10px;">Try Again</a>
+			</div>
+			{% else %}
 
-    {% elif prediction == 1 %}
-      <img src="./static/images/sad.png" style ="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 20px">
-      <br>
-      <br>
-      <p style="font-style: italic; font-size: 20px">Sorry, it seems that you are in risk of getting {{page}} disease</p>
-      <br>
-      <br>
-      <div class="prediction text-center">
-		    <a href="/recommend/1" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Suggestions</a>
-	  	</div>
-      <br>
+			{% if prediction == 0 %}
+			<!-- LOW RISK RESULT -->
+			<div class="panel panel-success" style="margin: 30px 0; border: 2px solid #27ae60; border-radius: 8px; background: linear-gradient(135deg, #d5f4e6 0%, #e8f8f5 100%);" id="reportContent">
+				<div class="panel-body" style="padding: 40px;">
+					<div class="text-center">
+						<div style="font-size: 80px; margin-bottom: 20px;">❤️</div>
+						<h2 style="color: #27ae60; font-weight: 700; margin-bottom: 15px;">
+							Great News! Low Risk
+						</h2>
+						<p style="font-size: 18px; color: #555; margin-bottom: 30px;">
+							Based on your information, your heart health appears to be in good condition.
+						</p>
+					</div>
 
-      <div class="prediction text-center">
-		    <a href="/" class="smoothScroll btn btn-success wow fadeInDown" data-wow-delay="2000">Back Home</a>
-	  	</div>
+					<!-- Heart Age vs Actual Age -->
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<div class="row text-center">
+							<div class="col-md-6">
+								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Age</h4>
+								<div style="font-size: 48px; font-weight: 700; color: #3498db; margin-bottom: 10px;">{{ actual_age|default(0) }}</div>
+								<p style="color: #777; font-size: 14px;">years old</p>
+							</div>
+							<div class="col-md-6">
+								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Heart Age</h4>
+								<div style="font-size: 48px; font-weight: 700; color: #27ae60; margin-bottom: 10px;">{{ heart_age|default(0) }}</div>
+								<p style="color: #777; font-size: 14px;">years old</p>
+							</div>
+						</div>
+						{% if heart_age and actual_age %}
+							{% if heart_age < actual_age %}
+							<div class="text-center" style="margin-top: 20px; padding: 15px; background: #e8f8f5; border-radius: 6px;">
+								<p style="color: #27ae60; font-size: 16px; margin: 0; font-weight: 600;">
+									✨ Your heart is {{ actual_age - heart_age }} years younger than your actual age!
+								</p>
+							</div>
+							{% elif heart_age == actual_age %}
+							<div class="text-center" style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 6px;">
+								<p style="color: #856404; font-size: 16px; margin: 0;">
+									Your heart age matches your actual age.
+								</p>
+							</div>
+							{% endif %}
+						{% endif %}
+					</div>
 
+					<!-- Risk Score -->
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">Your Heart Health Score</h4>
+						<div style="margin-bottom: 15px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+								<span style="font-weight: 600;">Risk Score</span>
+								<span style="font-weight: 700; color: #27ae60;">{{ risk_percentage|default(0) }}%</span>
+							</div>
+							<div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden; position: relative;">
+								<div style="height: 100%; width: {{ risk_percentage|default(0) }}%; background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); border-radius: 10px; transition: width 0.5s ease;"></div>
+							</div>
+						</div>
+						<p style="color: #27ae60; font-size: 14px; margin-top: 10px; font-weight: 600;">
+							✅ {{ risk_category|default('Low Risk') }}
+						</p>
+						{% if model_confidence %}
+						<p style="color: #777; font-size: 12px; margin-top: 5px;">
+							Model Confidence: {{ model_confidence }}%
+						</p>
+						{% endif %}
+					</div>
 
-     {% endif %}
-  </div>
-  <br>
-  <br>
-  <br>
+					<!-- Risk Factors -->
+					{% if risk_factors %}
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">Identified Factors</h4>
+						<ul style="list-style: none; padding: 0;">
+							{% for factor in risk_factors %}
+							<li style="margin-bottom: 12px; padding-left: 25px; position: relative;">
+								<span style="position: absolute; left: 0; color: #27ae60; font-size: 20px;">•</span>
+								{{ factor }}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endif %}
 
-    
+					<!-- Recommendations -->
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">Keep It Up!</h4>
+						<ul style="list-style: none; padding: 0;">
+							<li style="margin-bottom: 12px; padding-left: 25px; position: relative;">
+								<span style="position: absolute; left: 0; color: #27ae60; font-size: 20px;">✓</span>
+								Continue regular physical activity and maintain a healthy lifestyle
+							</li>
+							<li style="margin-bottom: 12px; padding-left: 25px; position: relative;">
+								<span style="position: absolute; left: 0; color: #27ae60; font-size: 20px;">✓</span>
+								Schedule regular check-ups with your doctor
+							</li>
+							<li style="margin-bottom: 12px; padding-left: 25px; position: relative;">
+								<span style="position: absolute; left: 0; color: #27ae60; font-size: 20px;">✓</span>
+								Maintain a balanced diet and avoid smoking
+							</li>
+						</ul>
+					</div>
+
+					<div class="text-center" style="margin: 40px 0;">
+						<a href="/" class="btn btn-success btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px; margin-right: 10px;">
+							Back Home
+						</a>
+						<a href="/heart_form" class="btn btn-default btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px;">
+							Check Again
+						</a>
+					</div>
+				</div>
+			</div>
+
+			{% elif prediction == 1 %}
+			<!-- HIGH RISK RESULT -->
+			<div class="panel panel-danger" style="margin: 30px 0; border: 2px solid #e74c3c; border-radius: 8px; background: linear-gradient(135deg, #fadbd8 0%, #f8d7da 100%);" id="reportContent">
+				<div class="panel-body" style="padding: 40px;">
+					<div class="text-center">
+						<div style="font-size: 80px; margin-bottom: 20px;">⚠️</div>
+						<h2 style="color: #e74c3c; font-weight: 700; margin-bottom: 15px;">
+							Risk Detected
+						</h2>
+						<p style="font-size: 18px; color: #555; margin-bottom: 30px;">
+							Based on your information, there may be some risk factors that need attention.
+						</p>
+					</div>
+
+					<!-- Heart Age vs Actual Age -->
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<div class="row text-center">
+							<div class="col-md-6">
+								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Age</h4>
+								<div style="font-size: 48px; font-weight: 700; color: #3498db; margin-bottom: 10px;">{{ actual_age|default(0) }}</div>
+								<p style="color: #777; font-size: 14px;">years old</p>
+							</div>
+							<div class="col-md-6">
+								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Heart Age</h4>
+								<div style="font-size: 48px; font-weight: 700; color: #e74c3c; margin-bottom: 10px;">{{ heart_age|default(0) }}</div>
+								<p style="color: #777; font-size: 14px;">years old</p>
+							</div>
+						</div>
+						{% if heart_age and actual_age and heart_age > actual_age %}
+						<div class="text-center" style="margin-top: 20px; padding: 15px; background: #f8d7da; border-radius: 6px;">
+							<p style="color: #c0392b; font-size: 16px; margin: 0; font-weight: 600;">
+								⚠️ Your heart age is {{ heart_age - actual_age }} years older than your actual age
+							</p>
+						</div>
+						{% endif %}
+					</div>
+
+					<!-- Risk Score -->
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">Your Heart Health Score</h4>
+						<div style="margin-bottom: 15px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+								<span style="font-weight: 600;">Risk Score</span>
+								<span style="font-weight: 700; color: #e74c3c;">{{ risk_percentage|default(0) }}%</span>
+							</div>
+							<div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden; position: relative;">
+								<div style="height: 100%; width: {{ risk_percentage|default(0) }}%; background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%); border-radius: 10px; transition: width 0.5s ease;"></div>
+							</div>
+						</div>
+						<p style="color: #e74c3c; font-size: 14px; margin-top: 10px; font-weight: 600;">
+							⚠️ {{ risk_category|default('High Risk') }}
+						</p>
+						{% if model_confidence %}
+						<p style="color: #777; font-size: 12px; margin-top: 5px;">
+							Model Confidence: {{ model_confidence }}%
+						</p>
+						{% endif %}
+					</div>
+
+					<!-- Risk Factors -->
+					{% if risk_factors %}
+					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+						<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">Identified Risk Factors</h4>
+						<ul style="list-style: none; padding: 0;">
+							{% for factor in risk_factors %}
+							<li style="margin-bottom: 12px; padding-left: 25px; position: relative;">
+								<span style="position: absolute; left: 0; color: #e74c3c; font-size: 20px;">•</span>
+								{{ factor }}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endif %}
+
+					<!-- Important Notice -->
+					<div class="alert alert-warning" style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 20px; margin: 25px 0;">
+						<h4 style="color: #856404; font-weight: 600; margin-bottom: 10px;">⚠️ Important Notice</h4>
+						<p style="color: #856404; margin: 0;">
+							This result is an estimate and does not replace professional medical advice. 
+							Please consult with a healthcare professional to discuss your heart health and develop an appropriate care plan.
+						</p>
+					</div>
+
+					<!-- Action Buttons -->
+					<div class="text-center" style="margin: 40px 0;">
+						<a href="/recommend/1" class="btn btn-danger btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px; margin-right: 10px;">
+							Get Recommendations
+						</a>
+						<a href="/" class="btn btn-default btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px; margin-right: 10px;">
+							Back Home
+						</a>
+						<a href="/heart_form" class="btn btn-default btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px;">
+							Check Again
+						</a>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+
+			<!-- Future Health Risk Graph -->
+			{% if future_risk_data %}
+			<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 30px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" id="chartSection">
+				<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px; text-align: center;">Your Future Heart Health Risk</h4>
+				<canvas id="futureRiskChart" style="max-height: 400px;"></canvas>
+			</div>
+			{% endif %}
+
+			<!-- How the Result is Calculated - Dropdown Accordion -->
+			<div style="background: #fff; padding: 0; border-radius: 8px; margin: 30px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;">
+				<!-- Dropdown Header -->
+				<button onclick="toggleCalculationDropdown()" style="width: 100%; padding: 20px; background: #f8f9fa; border: none; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 600; color: #2c3e50; transition: background 0.3s ease;" id="calcDropdownBtn">
+					<span>How Your Result is Calculated</span>
+					<span id="calcDropdownArrow" style="font-size: 20px; transition: transform 0.3s ease;">▼</span>
+				</button>
+				
+				<!-- Dropdown Content (Initially Hidden) -->
+				<div id="calcDropdownContent" style="display: none; padding: 25px; background: #fff;">
+					<p style="color: #555; line-height: 1.8; margin-bottom: 15px;">
+						Your heart health risk assessment is calculated using a machine learning model trained on clinical data, similar to approaches used by health organizations worldwide. Here's exactly how it works:
+					</p>
+					<ol style="color: #555; line-height: 1.8; padding-left: 20px;">
+						<li style="margin-bottom: 15px;">
+							<strong>Input Processing:</strong> Your entered values (age, gender, blood pressure, cholesterol, ECG results, etc.) are processed and normalized to match the model's training data format.
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Model Prediction:</strong> Our trained Random Forest machine learning model analyzes your 11 clinical inputs. The model has been trained on thousands of clinical cases to identify patterns associated with heart disease.
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Probability Calculation:</strong> The model uses <code style="background: #f1f1f1; padding: 2px 6px; border-radius: 3px; color: #e74c3c;">predict_proba()</code> to calculate the probability of heart disease. This gives us a score from 0% to 100%, where:
+							<ul style="margin-top: 10px; padding-left: 20px; list-style: disc;">
+								<li><strong>0-20%:</strong> Low Risk - The model predicts a low probability of heart disease based on your inputs.</li>
+								<li><strong>20-40%:</strong> Moderate Risk - The model indicates some risk factors present.</li>
+								<li><strong>40-60%:</strong> Moderate-High Risk - The model shows significant risk indicators.</li>
+								<li><strong>60-100%:</strong> High Risk - The model predicts a high probability of heart disease.</li>
+							</ul>
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Heart Age Calculation:</strong> Your heart age is calculated directly from the model's risk percentage. The formula is proportional: <code style="background: #f1f1f1; padding: 2px 6px; border-radius: 3px;">Heart Age = Your Age + (Risk % / 100) × 15</code>. Higher risk percentages result in an older calculated heart age, indicating your heart may be aging faster than expected.
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Risk Factors:</strong> Clinical factors from your input (age, blood pressure, cholesterol, ECG abnormalities, etc.) are identified and listed. These contribute to the model's overall assessment.
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Future Projection:</strong> The future risk graph projects your risk over 5 years based on your current risk level. The projection uses an exponential growth model where higher current risk levels increase at a faster rate over time.
+						</li>
+						<li style="margin-bottom: 15px;">
+							<strong>Model Features:</strong> The model analyzes these 11 clinical features in combination:
+							<ul style="margin-top: 10px; padding-left: 20px; list-style: disc;">
+								<li>Age, Gender, Chest Pain Type, Resting Blood Pressure, Serum Cholesterol</li>
+								<li>Fasting Blood Sugar, Resting ECG, Maximum Heart Rate</li>
+								<li>Exercise-Induced Angina, ST Depression (Oldpeak), Slope of ST Segment</li>
+							</ul>
+						</li>
+					</ol>
+					
+					<div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-top: 15px;">
+						<p style="color: #777; font-size: 13px; margin: 0;">
+							<strong>Note:</strong> This calculation method is similar to those used by health organizations like the Heart Foundation. The model's probability output directly determines your risk percentage, ensuring results reflect actual model predictions rather than estimated values.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Disclaimer -->
+			<div class="text-center" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+				<p style="font-size: 14px; color: #777; margin: 0;">
+					<strong>Disclaimer:</strong> This tool provides an educational estimate and does not constitute medical advice. 
+					Always consult with a qualified healthcare professional for proper diagnosis and treatment.
+				</p>
+			</div>
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+
+<!-- PDF Generation Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<!-- Chart.js for Future Risk Graph -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+// Future Risk Chart
+{% if future_risk_data %}
+var ctx = document.getElementById('futureRiskChart');
+if (ctx) {
+	var futureRiskChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: {{ future_risk_data.labels|tojson }},
+			datasets: [{
+				label: 'Risk Percentage (%)',
+				data: {{ future_risk_data.data|tojson }},
+				borderColor: 'rgb(231, 76, 60)',
+				backgroundColor: 'rgba(231, 76, 60, 0.1)',
+				borderWidth: 3,
+				fill: true,
+				tension: 0.4,
+				pointRadius: 5,
+				pointBackgroundColor: 'rgb(231, 76, 60)',
+				pointBorderColor: '#fff',
+				pointBorderWidth: 2
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: true,
+			scales: {
+				y: {
+					beginAtZero: true,
+					max: 100,
+					ticks: {
+						callback: function(value) {
+							return value + '%';
+						}
+					},
+					title: {
+						display: true,
+						text: 'Risk of Heart Disease (%)'
+					}
+				},
+				x: {
+					title: {
+						display: true,
+						text: 'Time Period'
+					}
+				}
+			},
+			plugins: {
+				legend: {
+					display: true,
+					position: 'top'
+				},
+				tooltip: {
+					callbacks: {
+						label: function(context) {
+							return 'Risk: ' + context.parsed.y.toFixed(2) + '%';
+						}
+					}
+				}
+			}
+		}
+	});
+}
+{% endif %}
+
+// Toggle Calculation Dropdown
+function toggleCalculationDropdown() {
+	var content = document.getElementById('calcDropdownContent');
+	var arrow = document.getElementById('calcDropdownArrow');
+	var btn = document.getElementById('calcDropdownBtn');
+	
+	if (content.style.display === 'none' || content.style.display === '') {
+		content.style.display = 'block';
+		arrow.style.transform = 'rotate(180deg)';
+		btn.style.background = '#e8f4f8';
+	} else {
+		content.style.display = 'none';
+		arrow.style.transform = 'rotate(0deg)';
+		btn.style.background = '#f8f9fa';
+	}
+}
+
+// Download Report Function - PDF Version
+function downloadReport() {
+	// Show loading message
+	var loadingMsg = document.createElement('div');
+	loadingMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 8px; z-index: 9999;';
+	loadingMsg.textContent = 'Generating PDF...';
+	document.body.appendChild(loadingMsg);
+	
+	// Expand the calculation dropdown for PDF
+	var calcContent = document.getElementById('calcDropdownContent');
+	var wasExpanded = calcContent && calcContent.style.display === 'block';
+	if (calcContent && !wasExpanded) {
+		calcContent.style.display = 'block';
+	}
+	
+	// Get all content to include in PDF
+	var reportElement = document.getElementById('reportContent');
+	var chartSection = document.getElementById('chartSection');
+	var calcSection = document.querySelector('[id="calcDropdownContent"]');
+	
+	// Create a temporary container for PDF generation
+	var tempContainer = document.createElement('div');
+	tempContainer.style.cssText = 'position: absolute; left: -9999px; width: 900px; background: white; padding: 20px;';
+	
+	// Clone report content
+	if (reportElement) {
+		var clonedReport = reportElement.cloneNode(true);
+		// Remove buttons from cloned content
+		var buttons = clonedReport.querySelectorAll('.btn, button');
+		buttons.forEach(function(btn) {
+			btn.style.display = 'none';
+		});
+		tempContainer.appendChild(clonedReport);
+	}
+	
+	// Clone chart if available
+	if (chartSection) {
+		var clonedChart = chartSection.cloneNode(true);
+		var canvas = clonedChart.querySelector('canvas');
+		if (canvas && typeof futureRiskChart !== 'undefined') {
+			// Get chart image
+			var chartImg = document.createElement('img');
+			chartImg.src = document.getElementById('futureRiskChart').toDataURL('image/png');
+			chartImg.style.maxWidth = '100%';
+			chartImg.style.height = 'auto';
+			canvas.parentNode.replaceChild(chartImg, canvas);
+		}
+		tempContainer.appendChild(clonedChart);
+	}
+	
+	// Clone calculation section if available
+	if (calcSection) {
+		var clonedCalc = calcSection.cloneNode(true);
+		tempContainer.appendChild(clonedCalc);
+	}
+	
+	document.body.appendChild(tempContainer);
+	
+	// Use html2canvas to capture the content, then jsPDF to create PDF
+	html2canvas(tempContainer, {
+		scale: 2,
+		useCORS: true,
+		logging: false,
+		width: tempContainer.offsetWidth,
+		height: tempContainer.offsetHeight
+	}).then(function(canvas) {
+		var imgData = canvas.toDataURL('image/png');
+		var pdf = new window.jspdf.jsPDF({
+			orientation: 'portrait',
+			unit: 'mm',
+			format: 'a4'
+		});
+		
+		var imgWidth = 210; // A4 width in mm
+		var pageHeight = 297; // A4 height in mm
+		var imgHeight = (canvas.height * imgWidth) / canvas.width;
+		var heightLeft = imgHeight;
+		var position = 0;
+		
+		// Add title page
+		pdf.setFontSize(20);
+		pdf.setTextColor(44, 62, 80);
+		pdf.text('My Heart Check Results Report', imgWidth / 2, 20, { align: 'center' });
+		
+		pdf.setFontSize(12);
+		pdf.setTextColor(119, 119, 119);
+		var dateStr = 'Generated on: ' + new Date().toLocaleString();
+		pdf.text(dateStr, imgWidth / 2, 30, { align: 'center' });
+		
+		position = 40;
+		
+		// Add main content image
+		pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+		heightLeft -= pageHeight;
+		
+		// Add additional pages if content is longer than one page
+		while (heightLeft >= 0) {
+			position = heightLeft - imgHeight;
+			pdf.addPage();
+			pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+			heightLeft -= pageHeight;
+		}
+		
+		// Add disclaimer on last page
+		pdf.setFontSize(10);
+		pdf.setTextColor(119, 119, 119);
+		var totalPages = pdf.internal.pages.length - 1;
+		pdf.setPage(totalPages);
+		pdf.text('Disclaimer: This tool provides an educational estimate and does not constitute medical advice.', imgWidth / 2, pageHeight - 10, { align: 'center' });
+		
+		// Download PDF
+		pdf.save('Heart_Check_Report_' + new Date().toISOString().split('T')[0] + '.pdf');
+		
+		// Cleanup
+		document.body.removeChild(tempContainer);
+		document.body.removeChild(loadingMsg);
+		
+		// Restore dropdown state if it was collapsed
+		if (calcContent && !wasExpanded) {
+			calcContent.style.display = 'none';
+		}
+	}).catch(function(error) {
+		console.error('Error generating PDF:', error);
+		document.body.removeChild(loadingMsg);
+		if (document.body.contains(tempContainer)) {
+			document.body.removeChild(tempContainer);
+		}
+		alert('Error generating PDF. Please try again or use the print option.');
+	});
+}
+</script>
+
 {% endblock %}
