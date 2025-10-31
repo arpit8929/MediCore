@@ -9,7 +9,7 @@ DB_NAME = 'database.db'
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static', static_url_path='/static')
     random.seed(0)
     app.config['SECRET_KEY'] = os.urandom(24)
     # For Vercel, use /tmp for writable files (instance folder may not be writable)

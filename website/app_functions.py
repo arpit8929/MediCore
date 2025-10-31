@@ -1,5 +1,6 @@
 import pickle
 import numpy as np
+import os
 
 
 # --- HEART VALUE PREDICTOR ONLY ---
@@ -8,7 +9,11 @@ def ValuePredictor(to_predict_list):
     print(f"DEBUG: Input values: {to_predict_list}")
     print(f"DEBUG: Number of features: {len(to_predict_list)}")
     
-    with open('./website/app_models/heart_model.pkl', 'rb') as f:
+    # Get the correct path for model file (works on both local and Vercel)
+    base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_path = os.path.join(base_path, 'website', 'app_models', 'heart_model.pkl')
+    
+    with open(model_path, 'rb') as f:
         heart_model = pickle.load(f)
     
     pred = heart_model.predict(np.array(to_predict_list).reshape(1, -1))
