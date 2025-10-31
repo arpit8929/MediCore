@@ -1,21 +1,35 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "app.py",
-        "use": "@vercel/python"
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "app.py"
-      }
-    ],
-    "env": {
-      "FLASK_ENV": "production",
-      "FLASK_APP": "app.py",
-      "PYTHONPATH": "/var/task"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/website/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ],
+  "env": {
+    "FLASK_ENV": "production",
+    "FLASK_APP": "app.py",
+    "PYTHONPATH": "/var/task",
+    "PYTHONUNBUFFERED": "1",
+    "VERCEL": "1"
+  },
+  "functions": {
+    "app.py": {
+      "maxDuration": 30
     }
   }
+}
   
