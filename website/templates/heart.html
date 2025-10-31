@@ -6,101 +6,203 @@
 
 <div class="container">
   <div class="row">
+    <br>
+    <br>
+
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default" style="border:1px solid #eee; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
-        <br>
-        <br>
-        <br>
         <div class="panel-body">
-          <h3 class="text-center" style="margin-top:0;">Start Your Heart Check</h3>
-          <p class="text-center" style="color:#777; margin-bottom:25px;">Enter your details below. This tool provides an estimate and does not replace medical advice. Please talk to your doctor if you’re concerned.</p>
-
-          <form action="/predict" method="POST">
-            <div class="row">
-              <!-- Left column -->
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="age">Age</label>
-                  <input class="form-control" type="number" min="0" required name="age" id="age" placeholder="e.g., 45">
+          <h3 class="text-center" style="margin-top:20px;">Start Your Heart Check</h3>
+          <p class="text-center" style="color:#777; margin-bottom:30px;">Enter your details step by step. This tool provides an estimate and does not replace medical advice.</p>
+          
+          <!-- Progress Indicator -->
+          <div class="row" style="margin-bottom:30px;">
+            <div class="col-md-12">
+              <div class="progress-indicator" style="display:flex; justify-content:space-between; align-items:center; position:relative; padding:0 40px;">
+                <div class="progress-step active" data-step="1" style="flex:1; text-align:center;">
+                  <div class="step-circle" style="width:40px; height:40px; border-radius:50%; background:#27ae60; color:white; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-weight:bold; border:3px solid #27ae60;">1</div>
+                  <div style="font-size:12px; color:#27ae60; font-weight:600;">Personal Info</div>
                 </div>
-                <div class="form-group">
-                  <label for="cp" class="form-label">Chest Pain Type (cp)</label>
-                  <select class="form-control" id="cp" name="cp" required>
-                    <option value="0">Typical angina</option>
-                    <option value="1">Atypical angina</option>
-                    <option value="2">Non‑anginal pain</option>
-                    <option value="3">Asymptomatic</option>
-                  </select>
+                <div class="progress-line" style="flex:1; height:3px; background:#ddd; margin:0 10px; position:relative; top:-20px;"></div>
+                <div class="progress-step" data-step="2" style="flex:1; text-align:center;">
+                  <div class="step-circle" style="width:40px; height:40px; border-radius:50%; background:#ecf0f1; color:#7f8c8d; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-weight:bold; border:3px solid #ecf0f1;">2</div>
+                  <div style="font-size:12px; color:#7f8c8d;">Vital Signs</div>
                 </div>
-                <div class="form-group">
-                  <label for="trestbps" class="form-label">Resting Blood Pressure (mm Hg)</label>
-                  <input class="form-control" type="number" min="0" id="trestbps" name="trestbps" required placeholder="e.g., 120">
-                  <small class="text-muted">Typical range: 90–120 mm Hg</small>
-                </div>
-                <div class="form-group">
-                  <label for="chol" class="form-label">Serum Cholesterol (mg/dl)</label>
-                  <input class="form-control" type="number" min="0" step="any" id="chol" name="chol" required placeholder="e.g., 190">
-                </div>
-                <div class="form-group">
-                  <label for="restecg" class="form-label">Resting ECG (restecg)</label>
-                  <select class="form-control" id="restecg" name="restecg" required>
-                    <option value="0">Normal</option>
-                    <option value="1">ST‑T wave abnormality</option>
-                    <option value="2">Left ventricular hypertrophy</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Right column -->
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Gender" class="form-label">Biological Sex</label>
-                  <select class="form-control" id="Gender" name="Gender" required>
-                    <option value="1">Male</option>
-                    <option value="0">Female</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="fbs" class="form-label">Fasting Blood Sugar (fbs)</label>
-                  <select class="form-control" id="fbs" name="fbs" required>
-                    <option value="0">≤ 120 mg/dl (Normal)</option>
-                    <option value="1">&gt; 120 mg/dl (High)</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="thalach" class="form-label">Maximum Heart Rate Achieved</label>
-                  <input class="form-control" type="number" min="0" step="any" id="thalach" name="thalach" required placeholder="e.g., 160">
-                </div>
-                <div class="form-group">
-                  <label for="exang" class="form-label">Exercise Induced Angina (exang)</label>
-                  <select class="form-control" id="exang" name="exang" required>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="oldpeak" class="form-label">Oldpeak</label>
-                  <input class="form-control" type="number" min="0" step="any" id="oldpeak" name="oldpeak" required placeholder="ST depression">
-                </div>
-                <div class="form-group">
-                  <label for="slope" class="form-label">Slope of Peak Exercise ST Segment</label>
-                  <select class="form-control" id="slope" name="slope" required>
-                    <option value="0">Upsloping</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Downsloping</option>
-                  </select>
+                <div class="progress-line" style="flex:1; height:3px; background:#ddd; margin:0 10px; position:relative; top:-20px;"></div>
+                <div class="progress-step" data-step="3" style="flex:1; text-align:center;">
+                  <div class="step-circle" style="width:40px; height:40px; border-radius:50%; background:#ecf0f1; color:#7f8c8d; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-weight:bold; border:3px solid #ecf0f1;">3</div>
+                  <div style="font-size:12px; color:#7f8c8d;">Exercise & Oldpeak</div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <hr>
-            <div class="text-center" style="margin-top:10px;">
-              <small class="text-muted">By clicking Predict, you confirm you understand this is an educational estimate, not a diagnosis.</small>
+          <form action="/predict" method="POST" id="heartForm">
+            <!-- Card 1: Simple Fields -->
+            <div class="form-card active" id="card1" style="display:block;">
+              <div style="background:#f8f9fa; padding:25px; border-radius:8px; margin-bottom:25px;">
+                <h4 style="color:#27ae60; margin-bottom:20px; font-weight:600;">
+                  <i class="fa fa-user" style="margin-right:8px;"></i>Basic Information
+                </h4>
+                <p style="color:#7f8c8d; margin-bottom:25px; font-size:14px;">Let's start with some basic details about you.</p>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="age" style="font-weight:600; color:#2c3e50;">Age <span style="color:#e74c3c;">*</span></label>
+                      <input class="form-control" type="number" min="0" required name="age" id="age" placeholder="e.g., 45" style="height:45px; border-radius:6px;">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="Gender" style="font-weight:600; color:#2c3e50;">Biological Sex <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="Gender" name="Gender" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="restecg" style="font-weight:600; color:#2c3e50;">Resting ECG <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="restecg" name="restecg" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="0">Normal</option>
+                        <option value="1">ST‑T wave abnormality</option>
+                        <option value="2">Left ventricular hypertrophy</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="text-right" style="margin-top:20px;">
+                <button type="button" class="btn btn-success btn-lg" onclick="nextCard(1)" style="padding:12px 40px; border-radius:6px;">
+                  Next <i class="fa fa-arrow-right" style="margin-left:8px;"></i>
+                </button>
+              </div>
             </div>
-            <div class="text-center" style="margin:20px 0 0;">
-              <button type="submit" class="btn btn-success btn-lg" value="submit">Predict</button>
+
+            <!-- Card 2: Important Fields -->
+            <div class="form-card" id="card2" style="display:none;">
+              <div style="background:#fff3cd; padding:25px; border-radius:8px; margin-bottom:25px; border-left:4px solid #f39c12;">
+                <h4 style="color:#f39c12; margin-bottom:20px; font-weight:600;">
+                  <i class="fa fa-heartbeat" style="margin-right:8px;"></i>Blood & Vital Signs
+                </h4>
+                <p style="color:#856404; margin-bottom:25px; font-size:14px;">Enter your blood pressure, cholesterol, blood sugar, and heart rate measurements.</p>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="trestbps" style="font-weight:600; color:#2c3e50;">Resting Blood Pressure (mm Hg) <span style="color:#e74c3c;">*</span></label>
+                      <input class="form-control" type="number" min="0" id="trestbps" name="trestbps" required placeholder="e.g., 120" style="height:45px; border-radius:6px;">
+                      <small class="text-muted" style="font-size:12px;">Typical range: 90–120 mm Hg</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="chol" style="font-weight:600; color:#2c3e50;">Serum Cholesterol (mg/dl) <span style="color:#e74c3c;">*</span></label>
+                      <input class="form-control" type="number" min="0" step="any" id="chol" name="chol" required placeholder="e.g., 190" style="height:45px; border-radius:6px;">
+                      <small class="text-muted" style="font-size:12px;">Healthy value is below 200 mg/dl</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="fbs" style="font-weight:600; color:#2c3e50;">Fasting Blood Sugar <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="fbs" name="fbs" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="0">≤ 120 mg/dl (Normal)</option>
+                        <option value="1">&gt; 120 mg/dl (High)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="thalach" style="font-weight:600; color:#2c3e50;">Maximum Heart Rate Achieved <span style="color:#e74c3c;">*</span></label>
+                      <input class="form-control" type="number" min="0" step="any" id="thalach" name="thalach" required placeholder="e.g., 160" style="height:45px; border-radius:6px;">
+                      <small class="text-muted" style="font-size:12px;">Typical range: 100–200 bpm</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="button" class="btn btn-default btn-lg" onclick="prevCard(2)" style="padding:12px 40px; border-radius:6px;">
+                  <i class="fa fa-arrow-left" style="margin-right:8px;"></i> Previous
+                </button>
+                <button type="button" class="btn btn-success btn-lg" onclick="nextCard(2)" style="padding:12px 40px; border-radius:6px;">
+                  Next <i class="fa fa-arrow-right" style="margin-left:8px;"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3: Most Important Fields -->
+            <div class="form-card" id="card3" style="display:none;">
+              <div style="background:#f8d7da; padding:25px; border-radius:8px; margin-bottom:25px; border-left:4px solid #e74c3c;">
+                <h4 style="color:#e74c3c; margin-bottom:20px; font-weight:600;">
+                  <i class="fa fa-stethoscope" style="margin-right:8px;"></i>Exercise & ECG Parameters
+                </h4>
+                <p style="color:#721c24; margin-bottom:25px; font-size:14px;">Enter details about chest pain, exercise response, and ECG exercise test results.</p>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cp" style="font-weight:600; color:#2c3e50;">Chest Pain Type <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="cp" name="cp" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="0">Typical angina</option>
+                        <option value="1">Atypical angina</option>
+                        <option value="2">Non‑anginal pain</option>
+                        <option value="3">Asymptomatic</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exang" style="font-weight:600; color:#2c3e50;">Exercise Induced Angina <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="exang" name="exang" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="oldpeak" style="font-weight:600; color:#2c3e50;">Oldpeak (ST Depression) <span style="color:#e74c3c;">*</span></label>
+                      <input class="form-control" type="number" min="0" step="any" id="oldpeak" name="oldpeak" required placeholder="ST depression value" style="height:45px; border-radius:6px;">
+                      <small class="text-muted" style="font-size:12px;">ST depression induced by exercise. Lower is better (0.0–6.2)</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="slope" style="font-weight:600; color:#2c3e50;">Slope of Peak Exercise ST Segment <span style="color:#e74c3c;">*</span></label>
+                      <select class="form-control" id="slope" name="slope" required style="height:45px; border-radius:6px;">
+                        <option value="">Select...</option>
+                        <option value="0">Upsloping</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Downsloping</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="button" class="btn btn-default btn-lg" onclick="prevCard(3)" style="padding:12px 40px; border-radius:6px;">
+                  <i class="fa fa-arrow-left" style="margin-right:8px;"></i> Previous
+                </button>
+                <button type="submit" class="btn btn-success btn-lg" style="padding:12px 40px; border-radius:6px;">
+                  <i class="fa fa-check" style="margin-right:8px;"></i> Predict
+                </button>
+              </div>
             </div>
           </form>
+
+          <div class="text-center" style="margin-top:20px;">
+            <small class="text-muted">By clicking Predict, you confirm you understand this is an educational estimate, not a diagnosis.</small>
+          </div>
         </div>
       </div>
     </div>
@@ -109,5 +211,129 @@
 <br>
 <br>
 <br>
+
+<script>
+let currentCard = 1;
+const totalCards = 3;
+
+function validateCard(cardNumber) {
+  let isValid = true;
+  const card = document.getElementById('card' + cardNumber);
+  const requiredFields = card.querySelectorAll('input[required], select[required]');
+  
+  requiredFields.forEach(field => {
+    if (!field.value.trim()) {
+      isValid = false;
+      field.style.borderColor = '#e74c3c';
+    } else {
+      field.style.borderColor = '#ddd';
+    }
+  });
+  
+  return isValid;
+}
+
+function updateProgressIndicator(step) {
+  const steps = document.querySelectorAll('.progress-step');
+  const lines = document.querySelectorAll('.progress-line');
+  
+  steps.forEach((s, index) => {
+    const stepNum = index + 1;
+    const circle = s.querySelector('.step-circle');
+    const label = s.querySelector('div:last-child');
+    
+    if (stepNum <= step) {
+      circle.style.background = '#27ae60';
+      circle.style.borderColor = '#27ae60';
+      circle.style.color = 'white';
+      label.style.color = '#27ae60';
+      label.style.fontWeight = '600';
+      
+      if (stepNum < step) {
+        if (lines[index]) {
+          lines[index].style.background = '#27ae60';
+        }
+      }
+    } else {
+      circle.style.background = '#ecf0f1';
+      circle.style.borderColor = '#ecf0f1';
+      circle.style.color = '#7f8c8d';
+      label.style.color = '#7f8c8d';
+      label.style.fontWeight = '400';
+      
+      if (lines[index]) {
+        lines[index].style.background = '#ddd';
+      }
+    }
+  });
+}
+
+function nextCard(fromCard) {
+  if (validateCard(fromCard)) {
+    // Hide current card
+    document.getElementById('card' + fromCard).style.display = 'none';
+    
+    // Show next card
+    currentCard = fromCard + 1;
+    document.getElementById('card' + currentCard).style.display = 'block';
+    
+    // Update progress indicator
+    updateProgressIndicator(currentCard);
+    
+    // Scroll to top of form
+    document.querySelector('.panel-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    alert('Please fill in all required fields before proceeding.');
+  }
+}
+
+function prevCard(fromCard) {
+  // Hide current card
+  document.getElementById('card' + fromCard).style.display = 'none';
+  
+  // Show previous card
+  currentCard = fromCard - 1;
+  document.getElementById('card' + currentCard).style.display = 'block';
+  
+  // Update progress indicator
+  updateProgressIndicator(currentCard);
+  
+  // Scroll to top of form
+  document.querySelector('.panel-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Initialize progress indicator
+updateProgressIndicator(1);
+</script>
+
+<style>
+.form-card {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-circle {
+  transition: all 0.3s ease;
+}
+
+.progress-line {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #27ae60;
+  box-shadow: 0 0 0 0.2px rgba(39, 174, 96, 0.25);
+}
+</style>
 
 {% endblock %}
