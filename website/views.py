@@ -9,6 +9,10 @@ def home():
 def heart():
     return render_template(r'heart_index.html')
 
+@views.route("/heart_check")
+def heart_check():
+    return render_template(r'heart_check_intro.html')
+
 @views.route('/recommend/<int:prediction_status>')
 def show_recommendation(prediction_status):
    

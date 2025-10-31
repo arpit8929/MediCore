@@ -1,0 +1,114 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<br>
+<br>
+<br>
+
+<div class="container" style="max-width: 900px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="text-center wow fadeInUp" data-wow-delay="0.3s">
+				<h1 style="font-size: 36px; font-weight: 700; color: #2c3e50; margin-bottom: 20px;">
+					My Heart Check
+				</h1>
+				<p style="font-size: 18px; color: #555; line-height: 1.8; margin-bottom: 30px;">
+					My Heart Check estimates your heart health and shares tips to help improve your heart health.
+					My Heart Check doesn't offer medical advice. Please talk to your doctor if you're worried about your heart.
+				</p>
+				<p style="font-size: 16px; color: #777; line-height: 1.6; margin-bottom: 30px;">
+					My Heart Check is designed for people aged between 30 and 75. You can use it if you are older or younger than this,
+					but your results may not be as accurate.
+				</p>
+			</div>
+
+			<div class="alert alert-danger text-center" style="margin: 30px 0; padding: 20px; border-radius: 8px; background-color: #f8d7da; border: 1px solid #f5c6cb;">
+				<strong style="font-size: 18px;">⚠️ Alert</strong><br>
+				If you think you have heart attack symptoms, call emergency services immediately.
+			</div>
+
+			<div class="panel panel-default" style="margin: 30px 0; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+				<div class="panel-body" style="padding: 30px;">
+					<h3 style="font-size: 22px; font-weight: 700; color: #2c3e50; margin-bottom: 20px;">
+						Important Information
+					</h3>
+					<ul style="font-size: 16px; line-height: 1.8; color: #555; padding-left: 20px;">
+						<li style="margin-bottom: 12px;">
+							My Heart Check calculates your heart health score and your risk of having a heart attack or stroke. It is based on calculations using medical data.
+						</li>
+						<li style="margin-bottom: 12px;">
+							This tool is <strong>not for anyone who has had a heart attack, stroke or has a heart condition</strong> – if this is you, ask your doctor for advice about your heart health.
+						</li>
+						<li style="margin-bottom: 12px;">The tool collects information from you and uses this to calculate your heart health score.</li>
+						<li style="margin-bottom: 12px;">
+							We delete any identifiable information about you once we have provided you with your score, and use de-identified information to analyse and improve the tool's performance.
+						</li>
+						<li style="margin-bottom: 12px;">You don't have to answer all the questions, but if you don't this will make your score less accurate.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="panel panel-warning" style="margin: 30px 0; border: 1px solid #ffc107; border-radius: 8px; background-color: #fff3cd;">
+				<div class="panel-body" style="padding: 30px;">
+					<h3 style="font-size: 22px; font-weight: 700; color: #856404; margin-bottom: 20px;">
+						This tool isn't accurate for people who have:
+					</h3>
+					<ul style="font-size: 16px; line-height: 1.8; color: #856404; padding-left: 20px;">
+						<li style="margin-bottom: 12px;">Had a heart attack, stroke or transient ischaemic attack (TIA)</li>
+						<li style="margin-bottom: 12px;">Angina or peripheral artery disease</li>
+						<li style="margin-bottom: 12px;">A stent or have had heart bypass surgery</li>
+						<li style="margin-bottom: 12px;">A serious mental illness, such as bipolar disorder, schizophrenia, severe depression or schizoaffective disorder</li>
+					</ul>
+					<p style="font-size: 15px; color: #856404; margin-top: 15px; font-style: italic;">
+						If you have one of these conditions, this calculator may underestimate your risk of heart attack and stroke. Please talk to your doctor for advice on how to manage your condition.
+					</p>
+				</div>
+			</div>
+
+			<div class="panel panel-info" style="margin: 30px 0; border: 1px solid #bee5eb; border-radius: 8px; background-color: #d1ecf1;">
+				<div class="panel-body" style="padding: 30px;">
+					<div class="checkbox" style="margin: 0;">
+						<label style="font-size: 16px; color: #0c5460; cursor: pointer;">
+							<input type="checkbox" id="agreeCheckbox" style="margin-right: 10px; width: 20px; height: 20px; vertical-align: middle;">
+							<strong>I understand that this tool does not provide medical advice.</strong> This is an educational estimate and should not replace consultation with a healthcare professional.
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center" style="margin: 40px 0;">
+				<button id="getStartedBtn" class="btn btn-success btn-lg" style="padding: 15px 40px; font-size: 18px; border-radius: 8px; opacity: 0.6; cursor: not-allowed;" disabled>
+					Get Started
+				</button>
+			</div>
+
+			<div class="text-center" style="margin-top: 30px; margin-bottom: 40px;">
+				<p style="font-size: 14px; color: #999;">
+					Read our privacy statement to find out how MediCore manages and uses your private information.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.getElementById('agreeCheckbox').addEventListener('change', function() {
+	var btn = document.getElementById('getStartedBtn');
+	if (this.checked) {
+		btn.disabled = false;
+		btn.style.opacity = '1';
+		btn.style.cursor = 'pointer';
+	} else {
+		btn.disabled = true;
+		btn.style.opacity = '0.6';
+		btn.style.cursor = 'not-allowed';
+	}
+});
+
+document.getElementById('getStartedBtn').addEventListener('click', function() {
+	if (!this.disabled) {
+		window.location.href = '/heart_form';
+	}
+});
+</script>
+
+{% endblock %}
