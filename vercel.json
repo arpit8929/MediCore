@@ -25,11 +25,6 @@
     "PYTHONPATH": "/var/task",
     "PYTHONUNBUFFERED": "1",
     "VERCEL": "1"
-  },
-  "functions": {
-    "app.py": {
-      "maxDuration": 30
-    }
   }
 }
   
