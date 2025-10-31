@@ -9,12 +9,16 @@ DB_NAME = 'database.db'
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static', static_url_path='/static')
     random.seed(0)
     app.config['SECRET_KEY'] = os.urandom(24)
-    # Ensure instance folder exists and store DB there (absolute path avoids cwd issues)
-    os.makedirs(app.instance_path, exist_ok=True)
-    db_path = os.path.join(app.instance_path, DB_NAME)
+    # For Vercel, use /tmp for writable files (instance folder may not be writable)
+    if os.environ.get('VERCEL'):
+        instance_path = '/tmp'
+    else:
+        instance_path = app.instance_path
+        os.makedirs(instance_path, exist_ok=True)
+    db_path = os.path.join(instance_path, DB_NAME)
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     db.init_app(app)

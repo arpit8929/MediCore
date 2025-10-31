@@ -9,9 +9,18 @@ def ValuePredictor(to_predict_list):
     print(f"DEBUG: Input values: {to_predict_list}")
     print(f"DEBUG: Number of features: {len(to_predict_list)}")
     
+<<<<<<< HEAD
     # Construct the absolute path to the model file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(current_dir, 'app_models', 'heart_model.pkl')
+=======
+    # Get the correct path for model file (works on both local and Vercel)
+    base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_path = os.path.join(base_path, 'website', 'app_models', 'heart_model.pkl')
+    
+    with open(model_path, 'rb') as f:
+        heart_model = pickle.load(f)
+>>>>>>> 62223cef3fa7ac43ef250548ea1b1ac6afbb7f8a
     
     try:
         with open(model_path, 'rb') as f:

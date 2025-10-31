@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Clg\Medicore\MediCore\venv_39"
+VIRTUAL_ENV="D:\MediCore\venv_39"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
