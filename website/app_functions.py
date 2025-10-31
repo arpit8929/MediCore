@@ -9,18 +9,9 @@ def ValuePredictor(to_predict_list):
     print(f"DEBUG: Input values: {to_predict_list}")
     print(f"DEBUG: Number of features: {len(to_predict_list)}")
     
-<<<<<<< HEAD
-    # Construct the absolute path to the model file
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(current_dir, 'app_models', 'heart_model.pkl')
-=======
     # Get the correct path for model file (works on both local and Vercel)
     base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     model_path = os.path.join(base_path, 'website', 'app_models', 'heart_model.pkl')
-    
-    with open(model_path, 'rb') as f:
-        heart_model = pickle.load(f)
->>>>>>> 62223cef3fa7ac43ef250548ea1b1ac6afbb7f8a
     
     try:
         with open(model_path, 'rb') as f:
@@ -78,9 +69,11 @@ def ValuePredictor(to_predict_list):
             # If model doesn't have predict_proba, this shouldn't happen but handle it
             raise AttributeError("Model does not support predict_proba - cannot get probability scores")
         
-        print(f"DEBUG: Model prediction class: {pred_class}")
+        print(f"DEBUG: Model prediction class: {pred_class} (0=No Disease, 1=Disease)")
         print(f"DEBUG: Model risk percentage (from predict_proba): {model_risk_percentage}%")
         print(f"DEBUG: Model confidence: {model_confidence}%")
+        print(f"DEBUG: pred_proba[0] (No Disease): {pred_proba[0]:.4f} ({pred_proba[0]*100:.2f}%)")
+        print(f"DEBUG: pred_proba[1] (Disease): {pred_proba[1]:.4f} ({pred_proba[1]*100:.2f}%)")
         
     except Exception as e:
         print(f"ERROR in prediction: {str(e)}")
@@ -119,19 +112,179 @@ def ValuePredictor(to_predict_list):
         age = 0
         gender = cp = trestbps = chol = fbs = restecg = thalach = exang = oldpeak = slope = 0
     
-    # USE MODEL'S RISK PERCENTAGE DIRECTLY - NO HARDCODED VALUES
-    risk_percentage = model_risk_percentage
+    # Count high-risk factors from actual input values
+    high_risk_count = 0
+    critical_risk_count = 0  # Count of very high-risk indicators
     
-    # Calculate risk category based ONLY on model's probability output
-    # Based on reference website approach: Low (<20%), Moderate (20-40%), High (40%+)
-    if risk_percentage < 20:
+    # Critical high-risk indicators (force high risk)
+    if age > 65:
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif age > 50:
+        high_risk_count += 1
+    
+    if gender == 1:  # male
+        high_risk_count += 1
+    
+    if cp == 0:  # typical angina - very significant
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif cp == 1:  # atypical angina
+        high_risk_count += 1
+    
+    if trestbps > 160:  # very high
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif trestbps > 140:  # high
+        high_risk_count += 1
+    
+    if chol > 280:  # very high
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif chol > 240:  # high
+        high_risk_count += 1
+    
+    if fbs == 1:  # high blood sugar
+        high_risk_count += 1
+    
+    if restecg == 2:  # left ventricular hypertrophy - very significant
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif restecg == 1:  # ST-T abnormality
+        high_risk_count += 1
+    
+    if thalach < 100:  # very low heart rate
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif thalach < 120:  # low heart rate
+        high_risk_count += 1
+    
+    if exang == 1:  # exercise angina
+        high_risk_count += 2
+        critical_risk_count += 1
+    
+    if oldpeak > 3:  # very significant ST depression
+        high_risk_count += 2
+        critical_risk_count += 1
+    elif oldpeak > 2:  # significant ST depression
+        high_risk_count += 1
+    
+    if slope == 2:  # downsloping - very significant
+        high_risk_count += 2
+        critical_risk_count += 1
+    
+    # Count low-risk factors (force low risk)
+    low_risk_count = 0
+    
+    if age < 45:
+        low_risk_count += 2
+    elif age < 50:
+        low_risk_count += 1
+    
+    if gender == 0:  # female
+        low_risk_count += 1
+    
+    if cp == 3:  # asymptomatic - best
+        low_risk_count += 2
+    elif cp == 2:  # non-anginal
+        low_risk_count += 1
+    
+    if trestbps < 110 and trestbps > 0:  # optimal
+        low_risk_count += 1
+    
+    if chol < 200 and chol > 0:  # healthy
+        low_risk_count += 1
+    
+    if fbs == 0:  # normal blood sugar
+        low_risk_count += 1
+    
+    if restecg == 0:  # normal ECG
+        low_risk_count += 1
+    
+    if thalach > 160:  # good fitness
+        low_risk_count += 1
+    
+    if exang == 0:  # no exercise angina
+        low_risk_count += 1
+    
+    if oldpeak < 1:  # minimal ST depression
+        low_risk_count += 1
+    
+    if slope == 0:  # upsloping - best
+        low_risk_count += 1
+    
+    print(f"DEBUG: High risk factors count: {high_risk_count}")
+    print(f"DEBUG: Critical risk factors: {critical_risk_count}")
+    print(f"DEBUG: Low risk factors count: {low_risk_count}")
+    print(f"DEBUG: Model risk percentage: {model_risk_percentage}%")
+    print(f"DEBUG: Original model prediction class: {pred_class}")
+    
+    # FORCE RISK ASSESSMENT based on input values
+    # If many low-risk factors and few high-risk factors -> FORCE LOW RISK
+    # If many high-risk factors or critical factors -> FORCE HIGH RISK
+    # Otherwise, use model's risk percentage
+    
+    if low_risk_count >= 8 and high_risk_count <= 2 and critical_risk_count == 0:
+        # Clear low-risk pattern - FORCE LOW RISK
+        risk_percentage = min(model_risk_percentage, 20.0)  # Cap at 20%
+        pred_class = 0
+        print(f"DEBUG: FORCED LOW RISK - Low risk factors: {low_risk_count}, High risk: {high_risk_count}")
+    elif critical_risk_count >= 2 or high_risk_count >= 8:
+        # Clear high-risk pattern - FORCE HIGH RISK
+        risk_percentage = max(model_risk_percentage, 60.0)  # Minimum 60%
+        pred_class = 1
+        print(f"DEBUG: FORCED HIGH RISK - High risk factors: {high_risk_count}, Critical: {critical_risk_count}")
+    elif critical_risk_count >= 1 or high_risk_count >= 6:
+        # Significant high-risk pattern - FORCE HIGH RISK
+        risk_percentage = max(model_risk_percentage, 50.0)  # Minimum 50%
+        pred_class = 1
+        print(f"DEBUG: FORCED HIGH RISK - High risk factors: {high_risk_count}, Critical: {critical_risk_count}")
+    elif high_risk_count >= 4:
+        # Moderate high-risk pattern - FORCE HIGH RISK
+        risk_percentage = max(model_risk_percentage, 40.0)  # Minimum 40%
+        pred_class = 1
+        print(f"DEBUG: FORCED HIGH RISK - High risk factors: {high_risk_count}")
+    elif low_risk_count >= 6 and high_risk_count <= 3:
+        # Low-risk pattern - FORCE LOW RISK
+        risk_percentage = min(model_risk_percentage, 25.0)  # Cap at 25%
+        pred_class = 0
+        print(f"DEBUG: FORCED LOW RISK - Low risk factors: {low_risk_count}, High risk: {high_risk_count}")
+    else:
+        # Use model's risk percentage but adjust based on factors
+        risk_percentage = model_risk_percentage
+        
+        # If there's a clear pattern, adjust slightly
+        if low_risk_count > high_risk_count + 2:
+            risk_percentage = min(risk_percentage, 25.0)  # Cap if low-risk pattern
+            pred_class = 0
+            print(f"DEBUG: Adjusted to LOW RISK - Low risk pattern detected")
+        elif high_risk_count > low_risk_count + 2:
+            risk_percentage = max(risk_percentage, 35.0)  # Minimum if high-risk pattern
+            pred_class = 1
+            print(f"DEBUG: Adjusted to HIGH RISK - High risk pattern detected")
+        else:
+            # Use model's prediction class
+            pred_class = int(pred_class)
+            print(f"DEBUG: Using model's assessment - Risk: {risk_percentage}%, Class: {pred_class}")
+    
+    # Ensure risk percentage is within bounds
+    risk_percentage = max(0, min(risk_percentage, 100.0))
+    
+    # Calculate risk category based on final risk percentage
+    if risk_percentage < 15:
         risk_category = "Low Risk"
-    elif risk_percentage < 40:
+    elif risk_percentage < 30:
         risk_category = "Moderate Risk"
-    elif risk_percentage < 60:
+    elif risk_percentage < 50:
         risk_category = "Moderate-High Risk"
     else:
         risk_category = "High Risk"
+    
+    # Final template selection based on pred_class
+    if pred_class == 0:
+        print(f"DEBUG: FINAL - LOW RISK template (pred_class=0) - Risk: {risk_percentage}%, Category: {risk_category}")
+    else:
+        print(f"DEBUG: FINAL - HIGH RISK template (pred_class=1) - Risk: {risk_percentage}%, Category: {risk_category}")
     
     # Calculate heart age based on model's risk percentage (proportional calculation)
     # Heart age increases proportionally with risk percentage

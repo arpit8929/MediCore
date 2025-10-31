@@ -8,6 +8,9 @@
 <!-- Print and Download Icons -->
 <div class="container" style="max-width: 900px; margin: auto;">
 	<div class="row">
+    <br>
+    <br>
+    <br>
 		<div class="col-md-12">
 			<div class="text-right" style="margin-bottom: 20px;">
 				<button onclick="window.print()" class="btn btn-default" style="margin-right: 10px; border-radius: 50%; width: 50px; height: 50px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: #f8f9fa; border: 2px solid #2ecc71; cursor: pointer;">
@@ -51,12 +54,8 @@
 					<!-- Heart Age vs Actual Age -->
 					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 						<div class="row text-center">
-							<div class="col-md-6">
-								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Age</h4>
-								<div style="font-size: 48px; font-weight: 700; color: #3498db; margin-bottom: 10px;">{{ actual_age|default(0) }}</div>
-								<p style="color: #777; font-size: 14px;">years old</p>
-							</div>
-							<div class="col-md-6">
+							
+							<div class="col-md-12" >
 								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Heart Age</h4>
 								<div style="font-size: 48px; font-weight: 700; color: #27ae60; margin-bottom: 10px;">{{ heart_age|default(0) }}</div>
 								<p style="color: #777; font-size: 14px;">years old</p>
@@ -163,12 +162,8 @@
 					<!-- Heart Age vs Actual Age -->
 					<div style="background: #fff; padding: 25px; border-radius: 8px; margin: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 						<div class="row text-center">
-							<div class="col-md-6">
-								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Age</h4>
-								<div style="font-size: 48px; font-weight: 700; color: #3498db; margin-bottom: 10px;">{{ actual_age|default(0) }}</div>
-								<p style="color: #777; font-size: 14px;">years old</p>
-							</div>
-							<div class="col-md-6">
+							
+							<div class="col-md-12">
 								<h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">Your Heart Age</h4>
 								<div style="font-size: 48px; font-weight: 700; color: #e74c3c; margin-bottom: 10px;">{{ heart_age|default(0) }}</div>
 								<p style="color: #777; font-size: 14px;">years old</p>
